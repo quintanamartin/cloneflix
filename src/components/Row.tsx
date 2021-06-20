@@ -24,7 +24,6 @@ const Row: FC<Myprops> = ({title, urlFetch}: Myprops) => {
     const fetchMovies = async () => {
       const request = await axios.get(urlFetch);
 
-      console.log(request.data.results);
       setMovies(request.data.results);
 
       return request;
