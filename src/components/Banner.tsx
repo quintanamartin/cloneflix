@@ -1,9 +1,8 @@
-import {url} from "inspector";
-
 import React, {useEffect, useState} from "react";
 
 import movieRequests from "../api";
 import axios from "../axios";
+
 import "./Banner.css";
 
 type Movie = {
@@ -29,7 +28,6 @@ const Banner = () => {
     };
 
     fetchMovie();
-    console.log(movie);
   }, []);
 
   const truncate = (str: any, n: number) => {
@@ -48,15 +46,14 @@ const Banner = () => {
       >
         <div className="content">
           <h1 className="title">{movie?.title || movie?.original_title}</h1>
-          <p>
-            {movie?.release_date.slice(0, 4)} - <small>Rating : {movie?.vote_average}</small>
-          </p>
+          <p>{movie?.release_date.slice(0, 4)}</p>
           <div className="content-buttons">
             <button className="content-button">Play</button>
             <button className="content-button">My list</button>
           </div>
           <h3 className="overview">{truncate(movie?.overview, 300)}</h3>
         </div>
+        <div className="fade-bottom" />
       </header>
     </div>
   );

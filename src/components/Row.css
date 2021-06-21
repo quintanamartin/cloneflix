@@ -1,5 +1,6 @@
 .row {
     margin-left: 20px;
+    color: white
 }
 
 .posters {
@@ -11,6 +12,7 @@
 
 .posters::-webkit-scrollbar {
     display: none;
+  
 }
 
 .poster-image {

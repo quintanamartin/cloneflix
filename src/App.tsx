@@ -1,7 +1,7 @@
 import React from "react";
 
 import Banner from "./components/Banner";
-import Heading from "./ui/Heading";
+import NavBar from "./ui/NavBar";
 import Row from "./components/Row";
 import movieRequests from "./api";
 import "./App.css";
@@ -9,7 +9,7 @@ import "./App.css";
 function App() {
   return (
     <div className="app">
-      <Heading />
+      <NavBar />
       {/* <Row title="Popular" urlFetch={movieRequests.fetchPopular} /> */}
       <Banner />
       <Row isLargeRow title="Trending" urlFetch={movieRequests.fetchTrending} />

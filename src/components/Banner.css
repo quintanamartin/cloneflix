@@ -32,6 +32,7 @@
     border-radius: 0.3vw;
     padding-left: 2rem;
     padding-right: 2rem;
+    margin-top: 1rem;
     margin-right: 1rem;
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
@@ -42,4 +43,9 @@
     color: #000 ;
     background-color: #e6e6e6 ;
     transition: all 0.2s ;
+}
+
+.fade-bottom{
+    height: 10rem;
+    background-image: linear-gradient(180deg, transparent, rgba(37,37,37,0.80), #111);
 }

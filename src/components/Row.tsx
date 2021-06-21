@@ -1,6 +1,10 @@
 import React, {FC, useState, useEffect} from "react";
+import YouTube from "react-youtube";
 
 import axios from "../axios";
+
+const movieTrailer = require("movie-trailer");
+
 import "./Row.css";
 
 interface Myprops {
@@ -22,6 +26,7 @@ const images_url = "https://image.tmdb.org/t/p/w500/";
 
 const Row: FC<Myprops> = ({title, urlFetch, isLargeRow}: Myprops) => {
   const [movies, setMovies] = useState<Movies[]>([]);
+  const [trailerUrl, setTrailerUrl] = useState<any>("");
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -35,6 +40,31 @@ const Row: FC<Myprops> = ({title, urlFetch, isLargeRow}: Myprops) => {
     fetchMovies();
   }, [urlFetch]);
 
+  const handleClick = (movie: any) => {
+    if (trailerUrl) {
+      setTrailerUrl("");
+    } else {
+      movieTrailer(movie?.title || "")
+        .then((url: any) => {
+          const urlParams = new URLSearchParams(new URL(url).search);
+
+          const param = urlParams.get("v");
+
+          setTrailerUrl(param);
+        })
+        .catch(() => alert("movie trailer not available"));
+    }
+  };
+
+  const opts: any = {
+    height: "390",
+    width: "100%",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  };
+
   return (
     <div className="row">
       <h2>{title}</h2>
@@ -45,9 +75,11 @@ const Row: FC<Myprops> = ({title, urlFetch, isLargeRow}: Myprops) => {
             alt={movie.title}
             className={`poster-image ${isLargeRow && "large-poster-image"}`}
             src={`${images_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
+            onClick={() => handleClick(movie)}
           />
         ))}
       </div>
+      {trailerUrl && <YouTube opts={opts} videoId={trailerUrl} />}
     </div>
   );
 };
